@@ -1,0 +1,18 @@
+version: '3'
+services:
+  grpc-mysql:
+    image: mysql:5.7
+    container_name: grpc_db
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_HOST=${DB_HOST}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - grpc_mysql:/var/lib/mysql
+volumes:
+  grpc_mysql:
+    driver: local

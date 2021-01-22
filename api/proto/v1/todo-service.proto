@@ -1,0 +1,73 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+message Todo {
+  int64 id = 1;
+  string title = 2;
+  string description = 3;
+  google.protobuf.Timestamp reminder = 4;
+}
+
+message CreateRequest {
+  string api = 1;
+  Todo todo = 2;
+}
+
+message CreateResponse {
+  string api = 1;
+  int64 id = 2;
+}
+
+message ReadRequest {
+  string api = 1;
+  int64 id = 2;
+}
+
+message ReadResponse {
+  string api = 1;
+  Todo todo = 2;
+}
+
+message UpdateRequest {
+  string api = 1;
+  Todo todo = 2;
+}
+
+message UpdateResponse {
+  string api = 1;
+  int64 updated = 2;
+}
+
+message DeleteRequest {
+  string api = 1;
+  int64 id = 2;
+}
+
+message DeleteResponse {
+  string api = 1;
+  int64 deleted = 2;
+}
+
+message ReadAllRequest {
+  string api = 1;
+}
+
+message ReadAllResponse {
+  string api = 1;
+  repeated Todo todos = 2;
+}
+
+service ToDoService {
+  // Create new item
+  rpc Create(CreateRequest) returns (CreateResponse) {}
+  // Read a item
+  rpc Read(ReadRequest) returns (ReadResponse) {}
+  // ReadAll item
+  rpc ReadAll(ReadAllRequest) returns (ReadAllResponse) {}
+  // Update a item
+  rpc Update(UpdateRequest) returns (UpdateResponse) {}
+  //Delete a item
+  rpc Delete(DeleteRequest) returns (DeleteResponse) {}
+}
+
+
